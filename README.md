@@ -24,3 +24,10 @@ A free, simple website for first year students to predict what score they requir
 - HTML
 - SQLite
 - Git and GitHub
+
+## System Diagram
+![System Diagram](docs/Grade_Predictor.drawio.png)
+
+## Eisenhower Matrix
+[View the Eisenhower Matrix (PDF)](docs/Eisenhower_Matrix.pdf)
+
