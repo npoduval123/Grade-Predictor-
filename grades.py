@@ -56,3 +56,24 @@ def current_grade(class_id):
     if graded_weight == 0:
         return None
     return round(earned / graded_weight * 100, 2)
+
+
+def clear_scores(class_id):
+    conn = sqlite3.connect(DB_NAME)
+    cur = conn.cursor()
+    cur.execute("""
+        DELETE FROM scores
+        WHERE category_id IN (SELECT id FROM categories WHERE class_id = ?)
+    """, (class_id,))
+    conn.commit()
+    conn.close()
+
+
+def score_needed(class_id, target):
+    """Average score needed on the remaining work to finish at the target grade.
+    With no scores entered this is mode 1; with some scores it is mode 2."""
+    earned, graded_weight = points_so_far(class_id)
+    remaining_weight = 100 - graded_weight
+    if remaining_weight <= 0:
+        return None
+    return round((target - earned) / remaining_weight * 100, 2)
