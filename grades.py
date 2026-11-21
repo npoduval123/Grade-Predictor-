@@ -77,3 +77,38 @@ def score_needed(class_id, target):
     if remaining_weight <= 0:
         return None
     return round((target - earned) / remaining_weight * 100, 2)
+
+
+def points_you_can_lose(class_id, target):
+    """How many more points you can lose and still finish at the target.
+    A negative number means the target is already out of reach."""
+    earned, graded_weight = points_so_far(class_id)
+    lost_so_far = graded_weight - earned
+    return round((100 - target) - lost_so_far, 2)
+
+
+def what_if_table(class_id, target, category_id, test_scores=(100, 90, 80, 70, 60, 0)):
+    """For one category with no score yet, returns (test score, average needed
+    on everything else) for each test score."""
+    earned, graded_weight = points_so_far(class_id)
+    weight = None
+    for cat_id, name, w, score in get_categories(class_id):
+        if cat_id == category_id:
+            if score is not None:
+                return None
+            weight = w
+    if weight is None:
+        return None
+
+    remaining_weight = 100 - graded_weight - weight
+    rows = []
+    for s in test_scores:
+        new_earned = earned + weight * s / 100
+        if remaining_weight <= 0:
+            needed = None
+        else:
+            needed = round((target - new_earned) / remaining_weight * 100, 2)
+        rows.append((s, needed))
+    return rows
+
+
