@@ -40,5 +40,8 @@ if __name__ == "__main__":
         ("Midterm 2", 20), ("Final", 35)])
     add_class("ENG 101 (sample)", [
         ("Essays", 50), ("Participation", 10), ("Final", 40)])
+    add_class("BIO 101 (sample)", [
+        ("Exam 1", 20), ("Exam 2", 20), ("Exam 3", 20),
+        ("Homework", 15), ("Final", 25)])
     # This one is on purpose: the weights add up to 80, so it should be rejected.
     add_class("Bad Weights (test)", [("Homework", 50), ("Final", 30)])

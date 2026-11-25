@@ -1,7 +1,7 @@
 from grades import (get_classes, get_categories, save_score,
                     clear_scores, current_grade, score_needed,
-                    points_you_can_lose, what_if_table)
-
+                    points_you_can_lose, what_if_table,
+                    parse_target, describe_needed, needed_for_each_letter)
 
 def choose_class():
     classes = get_classes()
@@ -36,21 +36,15 @@ def enter_scores(class_id):
 
 
 def show_result(class_id):
-    text = input("Target grade for this class (like 90): ")
-    try:
-        target = float(text)
-    except ValueError:
-        print("Please enter a number.")
+    text = input("Target grade (a number like 90, or a letter like B): ")
+    target = parse_target(text)
+    if target is None:
+        print("Please enter a number or a letter like B.")
         return
-    needed = score_needed(class_id, target)
-    if needed is None:
-        print("Every category already has a score, so nothing is left to earn.")
-    elif needed <= 0:
-        print("You have already secured that grade.")
-    elif needed > 100:
-        print(f"You would need {needed}% on the rest, which is out of reach.")
-    else:
-        print(f"You need an average of {needed}% on the remaining work.")
+    print(f"\nTo finish with {target}%: {describe_needed(score_needed(class_id, target))}")
+    print("\nFor each letter grade:")
+    for letter, cutoff, needed in needed_for_each_letter(class_id):
+        print(f"  {letter} ({cutoff}%): {describe_needed(needed)}")
 
 
 def explore(class_id):
