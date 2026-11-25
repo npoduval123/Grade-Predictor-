@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Grade Predictor</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #333; }
+    h1 { color: #4a5a78; }
+    .button { display: inline-block; padding: 10px 18px; margin: 6px 6px 6px 0; background: #6c7fa3; color: white; border: none; border-radius: 6px; text-decoration: none; font-size: 16px; cursor: pointer; }
+    .button:hover { background: #55678a; }
+    input, select { padding: 8px; margin: 4px 0; font-size: 16px; }
+    .error { color: #b00020; }
+    .result { background: #eef2f9; padding: 12px; border-radius: 6px; margin-top: 16px; }
+    table { border-collapse: collapse; }
+    td, th { padding: 6px 12px; text-align: left; }
+  </style>
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
