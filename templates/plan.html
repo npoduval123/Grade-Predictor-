@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ class_name }}: plan ahead</h1>
+<p>Pick a target grade (a number like 90, or a letter like B) and a category to test. You will see what you would need on everything else.</p>
+<table>
+  <tr><th>Category</th><th>Weight</th></tr>
+  {% for cat_id, name, weight, score in categories %}
+  <tr><td>{{ name }}</td><td>{{ weight }}%</td></tr>
+  {% endfor %}
+</table>
+<form method="post">
+  <p><label>Target grade (like 90 or B):</label>
+  <input type="text" name="target" size="6" value="{{ request.form.get('target', '') }}" required></p>
+  <p><label>Category to test:</label>
+  <select name="category_id">
+    {% for cat_id, name, weight, score in categories %}
+    <option value="{{ cat_id }}" {% if request.form.get('category_id') == cat_id|string %}selected{% endif %}>{{ name }} ({{ weight }}%)</option>
+    {% endfor %}
+  </select></p>
+  <button class="button" type="submit">Show what-if table</button>
+  <a class="button" href="/class/{{ class_id }}">Back</a>
+</form>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+{% if result %}
+<div class="result">
+  <p>To finish with {{ result.target }}%, you can lose up to <strong>{{ result.cushion }} points</strong> in total across the course.</p>
+  <p>If you score this on <strong>{{ result.category }}</strong>:</p>
+  <table>
+    <tr><th>{{ result.category }} score</th><th>What you need on everything else</th></tr>
+    {% for s, text in result.rows %}
+    <tr><td>{{ s }}%</td><td>{{ text }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}

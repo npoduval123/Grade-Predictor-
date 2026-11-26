@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ class_name }}</h1>
+<p>Where are you in this class?</p>
+<a class="button" href="/class/{{ class_id }}/plan">I have no scores yet</a>
+<a class="button" href="/class/{{ class_id }}/scores">I'll enter my scores</a>
+<p><a href="/classes">Pick another class</a></p>
+{% endblock %}

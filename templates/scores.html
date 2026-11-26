@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ class_name }}: enter your scores</h1>
+<p>Enter your score (0-100) for each finished category. Leave unfinished categories blank. If a category is only partly done, leave it blank too.</p>
+<form method="post">
+  <table>
+    <tr><th>Category</th><th>Weight</th><th>Your score</th></tr>
+    {% for cat_id, name, weight, score in categories %}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ weight }}%</td>
+      <td><input type="text" name="score_{{ cat_id }}" size="6" value="{{ request.form.get('score_' ~ cat_id, '') }}"></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><label>Target grade (like 90 or B):</label>
+  <input type="text" name="target" size="6" value="{{ request.form.get('target', '') }}" required></p>
+  <button class="button" type="submit">Calculate</button>
+  <a class="button" href="/class/{{ class_id }}">Back</a>
+</form>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+{% if result %}
+<div class="result">
+  {% if result.grade is not none %}
+  <p>Your grade so far: <strong>{{ result.grade }}%</strong></p>
+  {% endif %}
+  <p>To finish with {{ result.target }}%: <strong>{{ result.message }}</strong></p>
+  <p>For each letter grade:</p>
+  <table>
+    {% for letter, cutoff, text in result.letters %}
+    <tr><td>{{ letter }} ({{ cutoff }}%)</td><td>{{ text }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+{% endblock %}

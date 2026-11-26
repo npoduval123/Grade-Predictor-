@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pick your class</h1>
+{% if classes %}
+<form method="post">
+  <p>
+    <select name="class_id">
+      {% for class_id, name in classes %}
+      <option value="{{ class_id }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+  </p>
+    <a class="button" href="/menu">Back to menu</a>
+  <button class="button" type="submit">Continue</button>
+</form>
+{% else %}
+<p>No classes yet. Run classes.py to add some.</p>
+<a class="button" href="/menu">Back to menu</a>
+{% endif %}
+{% endblock %}
