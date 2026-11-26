@@ -111,4 +111,36 @@ def what_if_table(class_id, target, category_id, test_scores=(100, 90, 80, 70, 6
         rows.append((s, needed))
     return rows
 
+LETTER_CUTOFFS = {"A": 90, "B": 80, "C": 70, "D": 60}
+
+
+def parse_target(text):
+    """Accepts a number like 87 or a letter like B. Returns a number, or None."""
+    text = text.strip().upper()
+    if text in LETTER_CUTOFFS:
+        return float(LETTER_CUTOFFS[text])
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
+def describe_needed(needed):
+    if needed is None:
+        return "nothing is left to earn"
+    if needed <= 0:
+        return "already secured"
+    if needed > 100:
+        return f"out of reach (would need {needed}%)"
+    return f"need {needed}% on the remaining work"
+
+
+def needed_for_each_letter(class_id):
+    """Returns (letter, cutoff, score needed) for A, B, C, and D."""
+    return [(letter, cutoff, score_needed(class_id, cutoff))
+            for letter, cutoff in LETTER_CUTOFFS.items()]
+
+
+
+
 
