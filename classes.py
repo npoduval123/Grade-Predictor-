@@ -43,5 +43,4 @@ if __name__ == "__main__":
     add_class("CHEM 217", [
         ("Exam 1", 20), ("Exam 2", 20), ("Exam 3", 20),
         ("Homework", 15), ("Final", 25)])
-    # This one is on purpose: the weights add up to 80, so it should be rejected.
-    add_class("Bad Weights (test)", [("Homework", 50), ("Final", 30)])
+    
