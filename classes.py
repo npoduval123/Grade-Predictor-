@@ -34,7 +34,9 @@ def add_class(class_name, categories):
 
 if __name__ == "__main__":
     add_class("CS 180", [
-        ("Homework", 20), ("Projects", 30), ("Midterm", 20), ("Final", 30)])
+        ("Homework", 10), ("Projects", 30),
+        ("Midterm 1", 15), ("Midterm 2", 15),
+        ("Midterm 3", 15), ("Midterm 4", 15)])
     add_class("MA 161", [
         ("Quizzes", 15), ("Homework", 10), ("Midterm 1", 20),
         ("Midterm 2", 20), ("Final", 35)])
