@@ -33,14 +33,14 @@ def add_class(class_name, categories):
 
 
 if __name__ == "__main__":
-    add_class("CS 101 (sample)", [
+    add_class("CS 180", [
         ("Homework", 20), ("Projects", 30), ("Midterm", 20), ("Final", 30)])
-    add_class("MA 101 (sample)", [
+    add_class("MA 161", [
         ("Quizzes", 15), ("Homework", 10), ("Midterm 1", 20),
         ("Midterm 2", 20), ("Final", 35)])
-    add_class("ENG 101 (sample)", [
+    add_class("SCLA 101", [
         ("Essays", 50), ("Participation", 10), ("Final", 40)])
-    add_class("BIO 101 (sample)", [
+    add_class("CHEM 217", [
         ("Exam 1", 20), ("Exam 2", 20), ("Exam 3", 20),
         ("Homework", 15), ("Final", 25)])
     # This one is on purpose: the weights add up to 80, so it should be rejected.
