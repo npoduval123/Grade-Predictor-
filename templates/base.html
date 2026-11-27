@@ -1,21 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grade Predictor</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; color: #333; }
-    h1 { color: #4a5a78; }
-    .button { display: inline-block; padding: 10px 18px; margin: 6px 6px 6px 0; background: #6c7fa3; color: white; border: none; border-radius: 6px; text-decoration: none; font-size: 16px; cursor: pointer; }
-    .button:hover { background: #55678a; }
-    input, select { padding: 8px; margin: 4px 0; font-size: 16px; }
-    .error { color: #b00020; }
-    .result { background: #eef2f9; padding: 12px; border-radius: 6px; margin-top: 16px; }
-    table { border-collapse: collapse; }
-    td, th { padding: 6px 12px; text-align: left; }
+    :root {
+      --pine: #14362B;      /* top bar, headings */
+      --mist: #F3F7F5;      /* page background */
+      --teal: #0D9488;      /* buttons, links */
+      --teal-dark: #0F766E; /* button hover */
+      --mint: #6EE7B7;      /* highlights */
+      --mint-soft: #E3F8EF; /* light mint for table headers and result box */
+      --rust: #B45309;      /* errors and warnings */
+      --ink: #1F2D28;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: var(--ink);
+           background: var(--mist); min-height: 100vh; }
+    .topbar { background: linear-gradient(90deg, var(--pine), var(--teal)); padding: 14px 24px; }
+    .topbar a { color: white; text-decoration: none; font-size: 20px; font-weight: 600; }
+    .page { max-width: 720px; margin: 32px auto; padding: 0 16px; }
+    .card { background: white; border-radius: 14px; padding: 28px 32px;
+            box-shadow: 0 4px 18px rgba(20, 54, 43, 0.12); }
+    h1 { color: var(--pine); margin-top: 0; }
+    a { color: var(--teal-dark); }
+    .button { display: inline-block; padding: 10px 20px; margin: 6px 6px 6px 0;
+              background: var(--teal); color: white; border: none; border-radius: 8px;
+              text-decoration: none; font-size: 16px; font-weight: 600; cursor: pointer; }
+    .button:hover { background: var(--teal-dark); }
+    input, select { padding: 9px 10px; margin: 4px 0; font-size: 16px;
+                    border: 1px solid #b9cfc6; border-radius: 8px; }
+    input:focus, select:focus { outline: 2px solid var(--mint); border-color: var(--teal); }
+    table { border-collapse: collapse; margin: 12px 0; }
+    th { background: var(--mint-soft); text-align: left; color: var(--pine); }
+    td, th { padding: 8px 12px; border-bottom: 1px solid #dbe8e2; }
+    .error { color: var(--rust); font-weight: 600; }
+    .result { background: var(--mint-soft); padding: 14px 16px; border-radius: 10px;
+              margin-top: 16px; border-left: 5px solid var(--mint); }
   </style>
 </head>
 <body>
-  {% block content %}{% endblock %}
+  <header class="topbar"><a href="/">Grade Predictor</a></header>
+  <main class="page">
+    <div class="card">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
 </body>
 </html>
