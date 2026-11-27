@@ -8,7 +8,7 @@
   <tr><td>{{ name }}</td><td>{{ weight }}%</td></tr>
   {% endfor %}
 </table>
-<form method="post">
+<form method="post" autocomplete="off">
   <p><label>Target grade (like 90 or B):</label>
   <input type="text" name="target" size="6" value="{{ request.form.get('target', '') }}" required></p>
   <p><label>Category to test:</label>
