@@ -82,28 +82,18 @@ def add_class_page():
             error = "Please enter at least one assignment category."
 
         if error is None:
-            total = sum(weight for name, weight in categories)
-
-            if abs(total - 100) > 0.000001:
-                error = (
-                    f"Your weights add up to {total:g}%, "
-                    "but they must add up to exactly 100%."
-                )
-
-        if error is None:
+            # The database's UNIQUE rule is case-sensitive, so "cs 180" and
+            # "CS 180" would both be accepted without this check.
             existing_classes = get_classes()
-
             if any(name.casefold() == class_name.casefold()
                    for class_id, name in existing_classes):
                 error = "This class already exists."
 
         if error is None:
-            success = save_new_class(class_name, categories)
-
+            success, result_message = save_new_class(class_name, categories)
             if success:
                 return redirect(url_for("add_class_page", saved="1"))
-
-            error = "Could not save the class. Please try again."
+            error = result_message
 
         message = error
 
@@ -111,12 +101,7 @@ def add_class_page():
         message = "Class successfully saved!"
         success = True
 
-    return render_template(
-        "add_class.html",
-        message=message,
-        success=success
-    )
-
+    return render_template("add_class.html", message=message, success=success)
 
 @app.route("/menu")
 def menu():
